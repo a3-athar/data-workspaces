@@ -22,10 +22,10 @@ const LeastExpensiveCard: React.FC<LeastExpensiveCardProps> = ({
 
   return (
     <div>
-      <div className="card">
+      <div className="card m-0 p-3">
         <i
           className="pi pi-arrow-down pr-2"
-          style={{ color: "green", fontSize: "calc(10px + 2vmin)" }}
+          style={{ color: "green", fontSize: "calc(8px + 1vmin)" }}
         ></i>
         {lowestAmountItem?.item} : ₹{lowestAmountItem?.amount}
       </div>

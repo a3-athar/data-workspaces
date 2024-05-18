@@ -15,9 +15,10 @@
 
 .App-header {
   background-color: var(--blue-50);
+  background-image: repeating-linear-gradient(140deg,grey, black);
   min-height: 100vh;
-  font-size: calc(10px + 1vmin);
-  color: #374151;
+  font-size: calc(8px + 1vmin);
+  color: #000000;
 }
 
 .App-link {

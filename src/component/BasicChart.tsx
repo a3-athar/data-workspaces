@@ -3,10 +3,12 @@ import { Item } from "../types/types";
 import { Chart } from "primereact/chart";
 
 interface ExpenseBasicChartProps {
+  title: string;
   expenseData: Item[];
 }
 
 const ExpenseBasicChart: React.FC<ExpenseBasicChartProps> = ({
+  title,
   expenseData,
 }) => {
   const [chartData, setChartData] = useState({});
@@ -18,7 +20,7 @@ const ExpenseBasicChart: React.FC<ExpenseBasicChartProps> = ({
         labels: expenseData.map((item) => item.item),
         datasets: [
           {
-            label: "Expense Chart",
+            label: title,
             data: expenseData.map((item) => item.amount),
             borderWidth: 1,
           },
@@ -34,7 +36,7 @@ const ExpenseBasicChart: React.FC<ExpenseBasicChartProps> = ({
       setChartData(data);
       setChartOptions(options);
     }
-  }, [expenseData]);
+  }, [expenseData, title]);
   return (
     <div>
       {Object.keys(chartData).length > 0 && (

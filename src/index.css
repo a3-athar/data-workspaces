@@ -13,9 +13,16 @@ code {
 }
 .card {
   background: var(--surface-card);
-  border: 1px solid var(--surface-border);
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: var(--card-shadow);
   border-radius: 12px;
+  border-color: rgba(0,0,0,0.3);
+  border-width: 3px !important;
+  border-style: solid;
+  background-image: repeating-linear-gradient(40deg,rgb(196, 193, 193), white);
+  /* border-width: 400px;
+  border: 3px solid transparent;
+  border-image: linear-gradient(to right, green, lightgreen);
+  border-image-slice: 1; */
 }

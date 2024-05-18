@@ -22,10 +22,10 @@ const MostExpensiveCard: React.FC<MostExpensiveCardProps> = ({
 
   return (
     <div>
-      <div className="card">
+      <div className="card m-0 p-3">
         <i
           className="pi pi-arrow-up pr-2"
-          style={{ color: "red", fontSize: "calc(10px + 2vmin)" }}
+          style={{ color: "red", fontSize: "calc(8px + 1vmin)" }}
         ></i>
         {highestAmountItem?.item} : ₹{highestAmountItem?.amount}
       </div>

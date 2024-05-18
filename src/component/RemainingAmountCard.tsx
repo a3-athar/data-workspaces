@@ -3,7 +3,7 @@ import { Item } from "../types/types";
 
 interface RemainingAmountCardProps {
   expenseData: Item[];
-  openingAmount: number;
+  openingAmount: Item[];
 }
 
 const RemainingAmountCard: React.FC<RemainingAmountCardProps> = ({
@@ -14,14 +14,19 @@ const RemainingAmountCard: React.FC<RemainingAmountCardProps> = ({
 
   useEffect(() => {
     setRemainingAmount(
-      openingAmount -
+      openingAmount.reduce((total, item) => total + item.amount, 0) -
         expenseData.reduce((total, item) => total + item.amount, 0)
     );
   }, [expenseData, openingAmount]);
 
   return (
     <div>
-      <div className="card">Balance Amount : ₹{remainingAmount}</div>
+      <div className="card p-2">
+        <div className="p-2">Balance Amount</div>
+        <div className="p-1">
+          <div className="card m-0 p-3">₹{remainingAmount}</div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,22 +1,21 @@
 import UserInput from "../component/UserInput";
 import { useState } from "react";
-import LeastExpensiveCard from "../component/LeastExpensiveCard";
-import TotalExpenseCard from "../component/TotalExpenseCard";
-import MostExpensiveCard from "../component/MostExpensiveCard";
-import RemainingAmountCard from "../component/RemainingAmountCard";
 import ExpenseTable from "../component/ExpenseTable";
 import { Item } from "../types/types";
-import ExpenseBasicChart from "../component/ExpenseBasicChart";
+import BasicChart from "../component/BasicChart";
+import IncomeCard from "./IncomeCard";
+import ExpenseCard from "./ExpenseCard";
+import RemainingAmountCard from "../component/RemainingAmountCard";
 
 const Dashboard = () => {
-  const [formattedData, setformattedData] = useState<Item[]>([]);
-  const [openingAmount, setOpeningAmount] = useState<number>(0);
-  const userInput = (openingAmount: number, data: string) => {
-    parseString(data);
-    setOpeningAmount(openingAmount);
+  const [incomeData, setIncomeData] = useState<Item[]>([]);
+  const [expenseData, setExpenseData] = useState<Item[]>([]);
+  const userInput = (income: string, expense: string) => {
+    setIncomeData(formatData(income));
+    setExpenseData(formatData(expense));
   };
 
-  const parseString = (inputString: string): void => {
+  const formatData = (inputString: string): Item[] => {
     const items: Item[] = [];
 
     // Split the input string by new line
@@ -50,7 +49,7 @@ const Dashboard = () => {
         items.push({ id: id++, item, amount });
       }
     }
-    setformattedData(items);
+    return items;
   };
 
   return (
@@ -62,32 +61,33 @@ const Dashboard = () => {
       </div>
 
       <div className="grid">
-        <div className="col">
-          <TotalExpenseCard expenseData={formattedData} />
+        <div className="col-5">
+          <IncomeCard incomeItemList={incomeData} />
         </div>
-        <div className="col">
-          <LeastExpensiveCard expenseData={formattedData} />
+        <div className="col-2">
+          <RemainingAmountCard expenseData={expenseData} openingAmount={incomeData} />
         </div>
-        <div className="col">
-          <MostExpensiveCard expenseData={formattedData} />
-        </div>
-        <div className="col">
-          <RemainingAmountCard
-            expenseData={formattedData}
-            openingAmount={openingAmount}
-          />
+        <div className="col-5">
+          <ExpenseCard expenseItemList={expenseData} />
         </div>
       </div>
 
       <div className="grid">
         <div className="col-6">
-          <ExpenseBasicChart expenseData={formattedData}/>
+          <BasicChart title={'Income'} expenseData={incomeData} />
+        </div>
+
+        <div className="col-6">
+          <BasicChart title={'Expense'} expenseData={expenseData} />
         </div>
       </div>
 
       <div className="grid">
-        <div className="col-4">
-          <ExpenseTable tableData={formattedData} />
+      <div className="col-6">
+          <ExpenseTable tableData={incomeData} />
+        </div>
+        <div className="col-6">
+          <ExpenseTable tableData={expenseData} />
         </div>
       </div>
     </div>
